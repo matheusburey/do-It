@@ -1,14 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import {
-  Flex,
-  Grid,
-  Image,
-  Heading,
-  Text,
-  VStack,
-  Button,
-  Box,
-} from "@chakra-ui/react";
+import { Flex, Grid, Image, Heading, Text, VStack, Button, Box } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { useForm, FieldError, FieldValues } from "react-hook-form";
@@ -50,18 +41,9 @@ export function Login() {
         "linear(to-r, purple.800 65%, white 35%)",
       ]}
     >
-      <Flex
-        w={["full", "full", "90%", "70%"]}
-        justifyContent="center"
-        alignItems="center"
-        flexDirection={["column", "column", "row"]}
-      >
+      <Flex w={["full", "full", "90%", "70%"]} justifyContent="center" alignItems="center" flexDirection={["column", "column", "row"]}>
         <Grid w={["full", "full", "50%"]} paddingRight="50px">
-          <Image
-            src={logoSegundaria}
-            alt="logo doit"
-            boxSize={["120px", "120px", "150px"]}
-          />
+          <Image src={logoSegundaria} alt="logo doit" boxSize={["120px", "120px", "150px"]} />
           <Heading as="h1" my="4">
             O jeito fácil, gratis
           </Heading>
@@ -114,25 +96,11 @@ export function Login() {
               )}
             </Box>
 
-            <Button
-              isLoading={loading}
-              bg="purple.500"
-              w="full"
-              type="submit"
-              color="white"
-              h="60px"
-              _hover={{ background: "purple.900" }}
-            >
+            <Button isLoading={loading} bg="purple.500" w="full" type="submit" color="white" h="60px" _hover={{ background: "purple.900" }}>
               Entrar
             </Button>
             <Text color="gray.400">Ainda não possui uma conta?</Text>
-            <Button
-              bg="gray.100"
-              w="full"
-              color="gray.300"
-              h="60px"
-              _hover={{ background: "gray.200" }}
-            >
+            <Button bg="gray.100" w="full" color="gray.300" h="60px" _hover={{ background: "gray.200" }}>
               Entrar
             </Button>
           </VStack>

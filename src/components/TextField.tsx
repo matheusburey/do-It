@@ -1,22 +1,8 @@
 /* eslint-disable react/function-component-definition */
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/jsx-props-no-spreading */
-import {
-  FormControl,
-  FormLabel,
-  InputGroup,
-  InputLeftElement,
-  Input,
-  FormErrorMessage,
-  InputProps,
-} from "@chakra-ui/react";
-import {
-  forwardRef,
-  ForwardRefRenderFunction,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import { FormControl, FormLabel, InputGroup, InputLeftElement, Input, FormErrorMessage, InputProps } from "@chakra-ui/react";
+import { forwardRef, ForwardRefRenderFunction, useCallback, useEffect, useState } from "react";
 import { FieldError } from "react-hook-form";
 import { IconType } from "react-icons";
 
@@ -35,10 +21,7 @@ interface IPropsTextField extends InputProps {
 
 type KeysVariation = keyof typeof inputVariations;
 
-const TextFieldRef: ForwardRefRenderFunction<
-  HTMLInputElement,
-  IPropsTextField
-> = ({ label, error, icon: Icon, ...rest }, ref) => {
+const TextFieldRef: ForwardRefRenderFunction<HTMLInputElement, IPropsTextField> = ({ label, error, icon: Icon, ...rest }, ref) => {
   const [value, setValue] = useState("");
   const [variation, setVariation] = useState<KeysVariation>("default");
 
