@@ -3,6 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { useForm, FieldError } from "react-hook-form";
 import { FaEnvelope, FaLock } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
 import { IDataSignIn } from "../../api";
@@ -14,8 +15,9 @@ const signInSchema = yup.object().shape({
   password: yup.string().required("Senha obrigatoria"),
 });
 
-export function FormLogin() {
+export function LoginForm() {
   const { signIn } = useAuth();
+  const navigate = useNavigate();
   const {
     formState: { errors },
     register,
@@ -28,6 +30,7 @@ export function FormLogin() {
     setLoading(true);
     signIn(data);
     setInterval(() => setLoading(false), 1000);
+    navigate("/dashboard");
   };
 
   return (
