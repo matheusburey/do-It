@@ -28,9 +28,11 @@ export function LoginForm() {
 
   const handleSignIn = async (data: IDataSignIn): Promise<void> => {
     setLoading(true);
-    signIn(data);
+    const login = await signIn(data);
     setInterval(() => setLoading(false), 1000);
-    navigate("/dashboard");
+    if (login) {
+      navigate("/dashboard");
+    }
   };
 
   return (
@@ -82,7 +84,7 @@ export function LoginForm() {
           Entrar
         </Button>
         <Text color="gray.400">Ainda não possui uma conta?</Text>
-        <Button bg="gray.100" w="full" color="gray.300" h="60px" _hover={{ background: "gray.200" }}>
+        <Button bg="gray.100" w="full" color="gray.300" h="60px" _hover={{ background: "gray.200" }} onClick={() => navigate("/signup")}>
           Cadastrar
         </Button>
       </VStack>

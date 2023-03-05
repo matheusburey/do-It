@@ -6,7 +6,7 @@ export interface IProps {
 
 export interface IAuthContext {
   user: IUser;
-  signIn: (data: IDataSignIn) => Promise<void>;
+  signIn: (data: IDataSignIn) => Promise<boolean>;
   signOut: (data: IDataSignIn) => Promise<void>;
 }
 

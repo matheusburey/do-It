@@ -17,9 +17,10 @@ export function AuthProvider({ children }: IProps) {
     if (res?.detail.status === "ok") {
       localStorage.setItem("@Doit:user", JSON.stringify(res));
       setUser(res.data as IUser);
-    } else {
-      toast({ position: "top-right", title: res.detail.description, status: "error" });
+      return true;
     }
+    toast({ position: "top-right", title: res.detail.description, status: "error" });
+    return false;
   }, []);
 
   const signOut = async () => {
