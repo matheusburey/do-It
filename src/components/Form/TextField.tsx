@@ -42,7 +42,7 @@ const textFieldRef: ForwardRefRenderFunction<HTMLInputElement, IPropsTextField> 
 
   return (
     <FormControl isInvalid={!!error}>
-      {label && <FormLabel>{label}</FormLabel>}
+      {label && <FormLabel color="gray.400">{label}</FormLabel>}
       <InputGroup flexDirection="column">
         {Icon && (
           <InputLeftElement color={inputVariations[variation]} mt="2.5">
