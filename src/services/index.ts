@@ -1,1 +1,1 @@
-export const DATABASE_USERS = [{ id: 1, email: "teste@email.com", password: "1234" }];
+export const DATABASE_USERS = [{ id: 1, email: "teste@email.com", password: "1234", name: "Fulano" }];

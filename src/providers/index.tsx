@@ -11,7 +11,7 @@ interface IPropsProviders {
 export function Providers({ children }: IPropsProviders) {
   return (
     <AuthProvider>
-      <ChakraProvider theme={theme}>{children}</ChakraProvider>;
+      <ChakraProvider theme={theme}>{children}</ChakraProvider>
     </AuthProvider>
   );
 }

@@ -1,7 +1,8 @@
 import { useToast } from "@chakra-ui/react";
 import { createContext, useContext, useCallback, useState, useMemo } from "react";
 
-import { IDataSignIn, sigInApi } from "../../api";
+import { sigInApi } from "../../api";
+import { IDataSignIn } from "../../api/types";
 import { IProps, IAuthContext, IUser } from "./types";
 
 const AuthContext = createContext({} as IAuthContext);
