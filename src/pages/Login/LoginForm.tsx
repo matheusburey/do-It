@@ -6,7 +6,7 @@ import { FaEnvelope, FaLock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
-import { IDataSignIn } from "../../api";
+import { IDataSignIn } from "../../api/types";
 import { TextField } from "../../components/Form";
 import { useAuth } from "../../providers/Auth";
 
