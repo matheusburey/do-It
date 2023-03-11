@@ -14,4 +14,5 @@ export interface IUser {
   id: number;
   email: string;
   acessToken: string;
+  name: string;
 }

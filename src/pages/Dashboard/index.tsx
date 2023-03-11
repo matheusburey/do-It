@@ -1,13 +1,10 @@
-import { useAuth } from "../../providers/Auth";
+import { Header } from "../../components/Header";
 
 export function Dashboard() {
-  const { signOut } = useAuth();
   return (
     <div>
+      <Header />
       <h1>Dashboard</h1>
-      <button onClick={signOut} type="button">
-        log out
-      </button>
     </div>
   );
 }

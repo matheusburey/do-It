@@ -16,7 +16,7 @@ export function AuthProvider({ children }: IProps) {
   const signIn = useCallback(async (data: IDataSignIn) => {
     const res = await sigInApi(data);
     if (res?.detail.status === "ok") {
-      localStorage.setItem("@Doit:user", JSON.stringify(res));
+      localStorage.setItem("@Doit:user", JSON.stringify(res.data));
       setUser(res.data as IUser);
       return true;
     }
