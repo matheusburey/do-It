@@ -12,8 +12,8 @@ const inputVariations = {
 
 interface IPropsTextField extends InputProps {
   label: string;
-  error: FieldError | null;
-  icon: IconType;
+  error?: FieldError;
+  icon?: IconType;
 }
 
 type KeysVariation = keyof typeof inputVariations;
