@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 
 import { theme } from "../styles/theme";
 import { AuthProvider } from "./Auth";
+import { TasksProvider } from "./Tasks";
 
 interface IPropsProviders {
   children: ReactNode;
@@ -11,7 +12,9 @@ interface IPropsProviders {
 export function Providers({ children }: IPropsProviders) {
   return (
     <AuthProvider>
-      <ChakraProvider theme={theme}>{children}</ChakraProvider>
+      <TasksProvider>
+        <ChakraProvider theme={theme}>{children}</ChakraProvider>
+      </TasksProvider>
     </AuthProvider>
   );
 }
