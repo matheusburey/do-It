@@ -6,8 +6,8 @@ import { FaEnvelope, FaLock, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
-import { sigUpApi } from "../../api";
-import { IDataSignUp } from "../../api/types";
+import { sigUpApi } from "../../api/user";
+import { IDataSignUp } from "../../api/user/types";
 import { TextField } from "../../components/Form";
 
 const signUpSchema = yup.object().shape({
