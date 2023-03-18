@@ -1,4 +1,5 @@
-import { DATABASE_USERS } from "../services";
+import { DATABASE_USERS } from "../../services";
+import { IResponseDefault } from "../types";
 import { IDataSignIn, IDataSignUp, IResponseSigInApi } from "./types";
 
 const findUserEmail = (email: string) => DATABASE_USERS.find((user) => user.email === email);
@@ -13,7 +14,7 @@ export const sigInApi = async ({ email, password }: IDataSignIn): Promise<IRespo
   return { detail: { status: "error", description: "email ou senha invalidos" } };
 };
 
-export const sigUpApi = async ({ email, name, password }: IDataSignUp): Promise<IResponseSigInApi> => {
+export const sigUpApi = async ({ email, name, password }: IDataSignUp): Promise<IResponseDefault> => {
   const filterResult = findUserEmail(email);
 
   if (filterResult) {
