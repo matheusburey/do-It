@@ -4,6 +4,8 @@ import { useForm, FieldError } from "react-hook-form";
 import { FaClipboard, FaTimes } from "react-icons/fa";
 import * as yup from "yup";
 
+import { useAuth } from "../../providers/Auth";
+import { useTasks } from "../../providers/Tasks";
 import { theme } from "../../styles/theme";
 import { TextField, TextArea } from "../Form";
 
@@ -12,20 +14,27 @@ interface IProps {
   onClose: () => void;
 }
 
+interface ITaskData {
+  title: string;
+  description: string;
+}
+
 const signInSchema = yup.object().shape({
   title: yup.string().required("Titulo obrigatório"),
   description: yup.string().required("Descrição obrigatória").max(100, "Máximo de 100 caracteres"),
 });
 
 export function CreateNewTask({ isOpen, onClose }: IProps) {
+  const { user } = useAuth();
+  const { createTask } = useTasks();
   const {
     formState: { errors },
     register,
     handleSubmit,
-  } = useForm({ resolver: yupResolver(signInSchema) });
+  } = useForm<ITaskData>({ resolver: yupResolver(signInSchema) });
 
-  const handleCreateTask = (data: any) => {
-    console.log(data);
+  const handleCreateTask = (data: ITaskData) => {
+    createTask({ ...data, userId: user.id, completed: false }, user.acessToken);
   };
 
   return (
@@ -39,7 +48,7 @@ export function CreateNewTask({ isOpen, onClose }: IProps) {
           <Text fontWeight="bold" ml="2">
             Adicionar
           </Text>
-          <Center bg="red.600" w="32px" h="32px" ml="auto" borderRadius="md" as="button" fontSize="lg" onClick={onClose}>
+          <Center bg="red.600" w="32px" h="32px" ml="auto" borderRadius="md" fontSize="lg" onClick={onClose}>
             <FaTimes color={theme.colors.white} />
           </Center>
         </ModalHeader>
