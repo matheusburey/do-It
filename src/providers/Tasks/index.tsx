@@ -1,7 +1,7 @@
 import { useToast } from "@chakra-ui/react";
 import { createContext, useContext, useCallback, useState, useMemo } from "react";
 
-import { createNewTask, getTasks } from "../../api/tasks";
+import { createNewTask, deleteTasks, getTasks, updateTasks } from "../../api/tasks";
 import { ITask } from "../../api/tasks/types";
 import { IProps, ITasksContext } from "./types";
 
@@ -32,7 +32,41 @@ export function TasksProvider({ children }: IProps) {
     }
   }, []);
 
-  const value = useMemo(() => ({ tasks, createTask, loadTasks }), [tasks]);
+  const updateTask = useCallback(
+    async (taskId: number, acessToken: string) => {
+      if (!acessToken) {
+        toast({ position: "top-right", title: "Token invalido", status: "error" });
+      } else {
+        await updateTasks(taskId);
+
+        const task = tasks.find((task) => task.id === taskId);
+        if (task) {
+          const filteredTaks = tasks.filter((task) => task.id !== taskId);
+          task.completed = true;
+          setTasks([...filteredTaks, task]);
+          toast({ position: "top-right", title: "Task atualizada com sucesso", status: "success" });
+        }
+      }
+    },
+    [tasks]
+  );
+
+  const deleteTask = useCallback(
+    async (taskId: number, acessToken: string) => {
+      if (!acessToken) {
+        toast({ position: "top-right", title: "Token invalido", status: "error" });
+      } else {
+        await deleteTasks(taskId);
+
+        const filteredTaks = tasks.filter((task) => task.id !== taskId);
+        setTasks(filteredTaks);
+        toast({ position: "top-right", title: "Task deletada com sucesso", status: "success" });
+      }
+    },
+    [tasks]
+  );
+
+  const value = useMemo(() => ({ tasks, createTask, loadTasks, deleteTask, updateTask }), [tasks]);
 
   return <TasksContext.Provider value={value}>{children}</TasksContext.Provider>;
 }

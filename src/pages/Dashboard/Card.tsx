@@ -2,6 +2,8 @@ import { Box, Center, Flex, Heading, HStack, Progress, Text } from "@chakra-ui/r
 import { FaCheck, FaTrash } from "react-icons/fa";
 
 import { ITask } from "../../api/tasks/types";
+import { useAuth } from "../../providers/Auth";
+import { useTasks } from "../../providers/Tasks";
 import { theme } from "../../styles/theme";
 
 interface IProps {
@@ -9,6 +11,8 @@ interface IProps {
 }
 
 export function Card({ task }: IProps) {
+  const { deleteTask, updateTask } = useTasks();
+  const { user } = useAuth();
   return (
     <Box
       cursor="pointer"
@@ -25,10 +29,28 @@ export function Card({ task }: IProps) {
           {task.title}
         </Heading>
         <HStack spacing="4">
-          <Center as="button" w="30px" h="30px" borderWidth="1px" borderRadius="5px" borderColor="gray.2000" bg="white">
+          <Center
+            as="button"
+            w="30px"
+            h="30px"
+            borderWidth="1px"
+            borderRadius="5px"
+            borderColor="gray.2000"
+            bg="white"
+            onClick={() => deleteTask(task.id, user.acessToken)}
+          >
             <FaTrash color={theme.colors.gray["300"]} />
           </Center>
-          <Center as="button" w="30px" h="30px" borderWidth="1px" borderRadius="5px" borderColor="gray.2000" bg="white">
+          <Center
+            as="button"
+            w="30px"
+            h="30px"
+            borderWidth="1px"
+            borderRadius="5px"
+            borderColor="gray.2000"
+            bg="white"
+            onClick={() => updateTask(task.id, user.acessToken)}
+          >
             <FaCheck color={theme.colors.gray["300"]} />
           </Center>
         </HStack>

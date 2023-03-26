@@ -13,7 +13,7 @@ export function Dashboard() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setInterval(() => {
+    setTimeout(() => {
       loadTasks(user.id, user.acessToken);
       setLoading(true);
     }, 1000);
