@@ -18,7 +18,7 @@ interface IPropsTextField extends TextareaProps {
 
 type KeysVariation = keyof typeof inputVariations;
 
-const TextAreaRef: ForwardRefRenderFunction<HTMLInputElement, IPropsTextField> = ({ label, error, icon: Icon, ...rest }, ref) => {
+const TextAreaRef: ForwardRefRenderFunction<HTMLTextAreaElement, IPropsTextField> = ({ label, error, icon: Icon, ...rest }, ref) => {
   const [value, setValue] = useState("");
   const [variation, setVariation] = useState<KeysVariation>("default");
 
