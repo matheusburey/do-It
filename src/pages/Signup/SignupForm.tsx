@@ -35,14 +35,14 @@ export function SignupForm() {
   const handleSignUp = async (data: IDataSignUp): Promise<void> => {
     setLoading(true);
     const res = await sigUpApi(data);
-    console.log(res);
 
     setInterval(() => setLoading(false), 1000);
     if (res.detail.status === "ok") {
       toast({ position: "top-right", title: "Conta criada com sucesso", status: "success" });
       navigate("/");
+    } else {
+      toast({ position: "top-right", title: res.detail.description, status: "error" });
     }
-    toast({ position: "top-right", title: res.detail.description, status: "error" });
     setLoading(false);
   };
 
