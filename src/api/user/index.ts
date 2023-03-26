@@ -21,7 +21,7 @@ export const sigUpApi = async ({ email, name, password }: IDataSignUp): Promise<
     return { detail: { status: "error", description: "usuario ja existente" } };
   }
 
-  const newUser = { id: DATABASE_USERS.length, email, name, password };
+  const newUser = { id: DATABASE_USERS.length + 1, email, name, password };
   DATABASE_USERS.push(newUser);
 
   return { detail: { status: "ok" } };

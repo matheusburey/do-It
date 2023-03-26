@@ -15,18 +15,21 @@ export function TasksProvider({ children }: IProps) {
 
   const loadTasks = useCallback(async (userId: number, acessToken: string) => {
     if (!acessToken) {
-      toast({ position: "top-right", title: "Token invalido", status: "success" });
+      toast({ position: "top-right", title: "Token invalido", status: "error" });
+    } else {
+      const tasksResponse = await getTasks(userId);
+      setTasks(tasksResponse.data);
     }
-    const tasksResponse = await getTasks(userId);
-    setTasks(tasksResponse.data);
   }, []);
 
   const createTask = useCallback(async (data: Omit<ITask, "id">, acessToken: string) => {
-    if (acessToken) {
-      toast({ position: "top-right", title: "Token invalido", status: "success" });
+    if (!acessToken) {
+      toast({ position: "top-right", title: "Token invalido", status: "error" });
+    } else {
+      const newTask = await createNewTask(data);
+      setTasks((prev) => [...prev, newTask.data]);
+      toast({ position: "top-right", title: "Task criada com sucesso", status: "success" });
     }
-    const newTask = await createNewTask(data);
-    setTasks((prev) => [...prev, newTask.data]);
   }, []);
 
   const value = useMemo(() => ({ tasks, createTask, loadTasks }), [tasks]);
