@@ -1,5 +1,5 @@
-function App() {
-  return <h1>App</h1>
-}
+import { Routes } from "./routes";
 
-export default App
+export function App() {
+  return <Routes />;
+}

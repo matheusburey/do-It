@@ -27,11 +27,14 @@
   "rules": {
     "camelcase": "off",
     "import/no-unresolved": "error",
+    "react/jsx-props-no-spreading": "off",
     "@typescript-eslint/naming-convention": [
       "error",
       {
         "selector": "interface",
-        "format": ["PascalCase"],
+        "format": [
+          "PascalCase"
+        ],
         "custom": {
           "regex": "^I[A-Z]",
           "match": true
@@ -43,7 +46,7 @@
     "no-shadow": "off",
     "no-console": "off",
     "no-useless-constructor": "off",
-    "no-empty-function": "off",
+    "no-empty-function": "warn",
     "lines-between-class-members": "off",
     "import/extensions": [
       "error",
@@ -57,7 +60,15 @@
       "warn",
       {
         "newlinesBetween": "always",
-        "groups": ["module", "/^@shared/", ["parent", "sibling", "index"]],
+        "groups": [
+          "module",
+          "/^@shared/",
+          [
+            "parent",
+            "sibling",
+            "index"
+          ]
+        ],
         "alphabetize": {
           "order": "asc",
           "ignoreCase": true
@@ -67,19 +78,31 @@
     "import/no-extraneous-dependencies": [
       "error",
       {
-        "devDependencies": ["**/*.spec.js"]
+        "devDependencies": [
+          "**/*.spec.js"
+        ]
       }
     ],
-    "prettier/prettier": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 140
+      }
+    ],
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [".jsx", ".tsx"]
+        "extensions": [
+          ".jsx",
+          ".tsx"
+        ]
       }
     ],
     "react/react-in-jsx-scope": "off",
     "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": ["error"]
+    "@typescript-eslint/no-use-before-define": [
+      "error"
+    ]
   },
   "settings": {
     "import/resolver": {
