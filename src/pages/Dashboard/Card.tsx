@@ -8,9 +8,10 @@ import { theme } from "../../styles/theme";
 
 interface IProps {
   task: ITask;
+  openTaskDetail: (task: ITask) => void;
 }
 
-export function Card({ task }: IProps) {
+export function Card({ task, openTaskDetail }: IProps) {
   const { deleteTask, updateTask } = useTasks();
   const { user } = useAuth();
   return (
@@ -22,7 +23,7 @@ export function Card({ task }: IProps) {
       borderColor="gray.100"
       boxShadow="base"
       p="7"
-      w={["330px", "auto"]}
+      w={["83vw", "auto"]}
     >
       <Flex justify="space-between">
         <Heading as="h1" size="md">
@@ -55,7 +56,7 @@ export function Card({ task }: IProps) {
           </Center>
         </HStack>
       </Flex>
-      <Box w="full" mt="4">
+      <Box w="full" mt="4" onClick={() => openTaskDetail(task)}>
         <Text>{task.description}</Text>
         <Progress colorScheme="purple" mt="2.5" value={task.completed ? 100 : 10} />
         <Text color="gray.300" mt="3">

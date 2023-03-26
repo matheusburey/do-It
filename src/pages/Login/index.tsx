@@ -1,9 +1,21 @@
 import { Flex } from "@chakra-ui/react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
+import { useAuth } from "../../providers/Auth";
 import { LoginForm } from "./LoginForm";
 import { LoginInfo } from "./LoginInfo";
 
 export function Login() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user?.acessToken) {
+      navigate("/dashboard");
+    }
+  }, [user]);
+
   return (
     <Flex
       padding="10px 15px"
