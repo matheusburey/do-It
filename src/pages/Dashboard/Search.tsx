@@ -1,8 +1,7 @@
-import { Flex, Input, Center, Button, useDisclosure } from "@chakra-ui/react";
+import { Flex, Input, Center, Button } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { FaSearch } from "react-icons/fa";
 
-import { CreateNewTask } from "../../components/Modals";
 import { useTasks } from "../../providers/Tasks";
 import { theme } from "../../styles/theme";
 
@@ -10,9 +9,12 @@ interface ISearchData {
   title: string;
 }
 
-export function Search() {
+interface IProp {
+  onOpen: () => void;
+}
+
+export function Search({ onOpen }: IProp) {
   const { searchTask } = useTasks();
-  const { isOpen, onClose, onOpen } = useDisclosure();
   const { handleSubmit, register } = useForm<ISearchData>();
 
   const handleSearch = ({ title }: ISearchData) => searchTask(title);
@@ -54,7 +56,6 @@ export function Search() {
       >
         Adicionar uma nova tarefa
       </Button>
-      <CreateNewTask isOpen={isOpen} onClose={onClose} />
     </Flex>
   );
 }
