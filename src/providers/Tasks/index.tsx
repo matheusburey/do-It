@@ -1,7 +1,7 @@
 import { useToast } from "@chakra-ui/react";
 import { createContext, useContext, useCallback, useState, useMemo } from "react";
 
-import { createNewTask, deleteTasks, getTasks, updateTasks } from "../../api/tasks";
+import { createNewTaskApi, deleteTaskApi, getTasksApi, searchTasksApi, updateTaskApi } from "../../api/tasks";
 import { ITask } from "../../api/tasks/types";
 import { IProps, ITasksContext } from "./types";
 
@@ -12,13 +12,16 @@ export const useTasks = () => useContext(TasksContext);
 export function TasksProvider({ children }: IProps) {
   const toast = useToast();
   const [tasks, setTasks] = useState<ITask[]>([]);
+  const [taskNotFound, setTaskNotFound] = useState<string>();
 
   const loadTasks = useCallback(async (userId: number, acessToken: string) => {
     if (!acessToken) {
       toast({ position: "top-right", title: "Token invalido", status: "error" });
     } else {
-      const tasksResponse = await getTasks(userId);
-      setTasks(tasksResponse.data);
+      const tasksResponse = await getTasksApi(userId);
+      if (tasksResponse.data) {
+        setTasks(tasksResponse.data);
+      }
     }
   }, []);
 
@@ -26,7 +29,7 @@ export function TasksProvider({ children }: IProps) {
     if (!acessToken) {
       toast({ position: "top-right", title: "Token invalido", status: "error" });
     } else {
-      const newTask = await createNewTask(data);
+      const newTask = await createNewTaskApi(data);
       setTasks((prev) => [...prev, newTask.data]);
       toast({ position: "top-right", title: "Task criada com sucesso", status: "success" });
     }
@@ -37,7 +40,7 @@ export function TasksProvider({ children }: IProps) {
       if (!acessToken) {
         toast({ position: "top-right", title: "Token invalido", status: "error" });
       } else {
-        await updateTasks(taskId);
+        await updateTaskApi(taskId);
 
         const task = tasks.find((task) => task.id === taskId);
         if (task) {
@@ -56,7 +59,7 @@ export function TasksProvider({ children }: IProps) {
       if (!acessToken) {
         toast({ position: "top-right", title: "Token invalido", status: "error" });
       } else {
-        await deleteTasks(taskId);
+        await deleteTaskApi(taskId);
 
         const filteredTaks = tasks.filter((task) => task.id !== taskId);
         setTasks(filteredTaks);
@@ -66,7 +69,20 @@ export function TasksProvider({ children }: IProps) {
     [tasks]
   );
 
-  const value = useMemo(() => ({ tasks, createTask, loadTasks, deleteTask, updateTask }), [tasks]);
+  const searchTask = useCallback(
+    async (title: string) => {
+      const res = await searchTasksApi(title);
+      if (res?.data) {
+        setTasks(res.data);
+        setTaskNotFound(undefined);
+      } else {
+        setTaskNotFound(title);
+      }
+    },
+    [tasks]
+  );
+
+  const value = useMemo(() => ({ taskNotFound, tasks, createTask, loadTasks, deleteTask, updateTask, searchTask }), [tasks, taskNotFound]);
 
   return <TasksContext.Provider value={value}>{children}</TasksContext.Provider>;
 }
