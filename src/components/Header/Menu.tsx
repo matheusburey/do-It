@@ -13,7 +13,7 @@ export function Menu({ isOpen, onClose }: IProps) {
 
   return (
     <Drawer placement="top" onClose={onClose} isOpen={isOpen}>
-      <DrawerOverlay mt="8vh" />
+      <DrawerOverlay mt="9.5vh" />
       <DrawerContent ml="auto" mt="80px" w={["450", "350px"]}>
         <DrawerHeader borderBottomWidth="1px" borderColor="gray.50" color="gray.400">
           {user?.name}

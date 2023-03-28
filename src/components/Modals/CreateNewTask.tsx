@@ -35,6 +35,7 @@ export function CreateNewTask({ isOpen, onClose }: IProps) {
 
   const handleCreateTask = (data: ITaskData) => {
     createTask({ ...data, userId: user.id, completed: false }, user.acessToken);
+    onClose();
   };
 
   return (

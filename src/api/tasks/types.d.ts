@@ -17,5 +17,5 @@ export interface IResponseGetTasks {
   detail: {
     status: string;
   };
-  data: ITask[];
+  data?: ITask[];
 }
