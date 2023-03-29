@@ -49,8 +49,8 @@ export function Dashboard() {
       ) : !loading && !tasks.length ? (
         <FirstTask onOpen={onOpenCreateNewTask} />
       ) : (
-        <Grid templateColumns="repeat(auto-fill, minmax(420px, 1fr))" gap="10" px="8" mt="8">
-          {loading ? <CardSkeleton /> : tasks.map((task) => <Card key={task.id} task={task} openTaskDetail={openTaskDetail} />)}
+        <Grid templateColumns="repeat(auto-fill, minmax(420px, 1fr))" gap="10" px={["4", "8"]} mt="8">
+          {!loading ? <CardSkeleton /> : tasks.map((task) => <Card key={task.id} task={task} openTaskDetail={openTaskDetail} />)}
         </Grid>
       )}
       <TasksDetail isOpen={isOpenTasksDetail} onClose={onCloseTasksDetail} task={selectedTask} />
